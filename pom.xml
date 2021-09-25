@@ -32,12 +32,29 @@
     </repository>
 	<repository>
 		<id>dataone.org</id>
-		<url>http://maven.dataone.org</url>
+		<url>https://maven.dataone.org</url>
 		<releases>
 		    <enabled>true</enabled>
 		</releases>
 		<snapshots>
 		    <enabled>true</enabled>
+		</snapshots>
+	</repository>
+	<!--
+		2021-09-24 <mecum@nceas.ucsb.edu>
+
+		Remove this eventually: http->https mirror for maven.restlet that we can
+		remove once we update solr-core to a version that doesn't have the http
+		repository for restlet.
+	-->
+	<repository>
+		<id>maven-restlet</id>
+		<url>https://maven.restlet.org</url>
+		<releases>
+			<enabled>true</enabled>
+		</releases>
+		<snapshots>
+			<enabled>true</enabled>
 		</snapshots>
 	</repository>
  </repositories>
