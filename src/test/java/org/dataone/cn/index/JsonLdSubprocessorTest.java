@@ -78,6 +78,7 @@ public class JsonLdSubprocessorTest extends RdfXmlProcessorTest {
     private Resource schemaOrgTestDocHttps;
     private Resource schemaOrgTestDocDryad1;
     private Resource schemaOrgTestDocDryad2;
+    private Resource schemaOrgTesHakaiDeep;
 
     /* An instance of the RDF/XML Subprocessor */
     private JsonLdSubprocessor jsonLdSubprocessor;
@@ -85,7 +86,10 @@ public class JsonLdSubprocessorTest extends RdfXmlProcessorTest {
     /* Store a map of expected Solr fields and their values for testing */
     private HashMap<String, String> expectedFields = new HashMap<String, String>();
 
-    private static final int SLEEPTIME = 5000;
+    private static final int SLEEPTIME = 8000;
+    private static final int SLEEP = 2000;
+    private static final int TIMES = 10;
+    
 
     /**
      * For each test, set up the Solr service and test data
@@ -106,6 +110,7 @@ public class JsonLdSubprocessorTest extends RdfXmlProcessorTest {
         schemaOrgTestDocHttps = (Resource) context.getBean("schemaOrgTestHttps");
         schemaOrgTestDocDryad1 = (Resource) context.getBean("schemaOrgTestDryad1");
         schemaOrgTestDocDryad2 = (Resource) context.getBean("schemaOrgTestDryad2");
+        schemaOrgTesHakaiDeep = (Resource) context.getBean("schemaOrgTesHakaiDeep");
 
         // instantiate the subprocessor
         jsonLdSubprocessor = (JsonLdSubprocessor) context.getBean("jsonLdSubprocessor");
@@ -144,8 +149,15 @@ public class JsonLdSubprocessorTest extends RdfXmlProcessorTest {
         Thread.sleep(SLEEPTIME);
         // now process the tasks
         processor.processIndexTaskQueue();
-        Thread.sleep(SLEEPTIME);
-        assertPresentInSolrIndex(id);
+        for (int i=0; i<TIMES; i++) {
+            try {
+                Thread.sleep(SLEEP);
+                assertPresentInSolrIndex(id);
+                break;
+            } catch (Throwable e) {
+                
+            }
+        }
         assertTrue(compareFieldValue(id, "title", "Neodymium isotopes, B/Ca and δ¹³C, and fresh sand volcanic glass count data from ODP Site 208-1267 and IODP Site 306-U1313 for MIS M2, MIS 100 and the Last Glacial-Holocene"));
         assertTrue(compareFieldValue(id, "abstract", "Marine Isotope Stage (MIS) M2, 3.3 Ma, is an isolated cold stage punctuating the benthic oxygen isotope (\u03b4\u00b9\u2078O)"));
         assertTrue(compareFieldValue(id, "label", "Neodymium isotopes"));
@@ -225,8 +237,15 @@ public class JsonLdSubprocessorTest extends RdfXmlProcessorTest {
         Thread.sleep(SLEEPTIME);
         // now process the tasks
         processor.processIndexTaskQueue();
-        Thread.sleep(SLEEPTIME);
-        assertPresentInSolrIndex(id);
+        for (int i=0; i<TIMES; i++) {
+            try {
+                Thread.sleep(SLEEP);
+                assertPresentInSolrIndex(id);
+                break;
+            } catch (Throwable e) {
+                
+            }
+        }
         assertTrue(compareFieldValue(id, "title", new String [] {"Context-dependent costs and benefits of a heterospecific nesting association"}));
         assertTrue(compareFieldValue(id, "author", new String [] {"Rose J Swift"}));
         assertTrue(compareFieldValue(id, "abstract", new String [] {"The costs and benefits of interactions among species"}));
@@ -271,8 +290,15 @@ public class JsonLdSubprocessorTest extends RdfXmlProcessorTest {
         Thread.sleep(SLEEPTIME);
         // now process the tasks
         processor.processIndexTaskQueue();
-        Thread.sleep(SLEEPTIME);
-        assertPresentInSolrIndex(id);
+        for (int i=0; i<TIMES; i++) {
+            try {
+                Thread.sleep(SLEEP);
+                assertPresentInSolrIndex(id);
+                break;
+            } catch (Throwable e) {
+                
+            }
+        }
         assertTrue(compareFieldValue(id, "title", new String[] {"Larval krill studies - fluorescence and clearance from ARSV Laurence M. Gould LMG0106, LMG0205 in the Southern Ocean from 2001-2002 (SOGLOBEC project)"}));
         assertTrue(compareFieldValue(id, "abstract", new String[] {"Winter ecology of larval krill: quantifying their interaction with the pack ice habitat."}));
         String [] urls = {"https://www.example-data-repository.org/dataset/3300/data/larval-krill.tsv",
@@ -346,9 +372,15 @@ public class JsonLdSubprocessorTest extends RdfXmlProcessorTest {
             Thread.sleep(SLEEPTIME);
             // now process the tasks
             processor.processIndexTaskQueue();
-            Thread.sleep(SLEEPTIME);
-            assertPresentInSolrIndex(thisId);
-
+            for (int j=0; j<TIMES; j++) {
+                try {
+                    Thread.sleep(SLEEP);
+                    assertPresentInSolrIndex(thisId);
+                    break;
+                } catch (Throwable e) {
+                    
+                }
+            }
             assertTrue(compareFieldValue(thisId, "title", new String [] {"test of context normalization"}));
             assertTrue(compareFieldValue(thisId, "author", new String [] {"creator_03"}));
             String[] origins = {"creator_03", "creator_02", "creator_01"};
@@ -389,8 +421,15 @@ public class JsonLdSubprocessorTest extends RdfXmlProcessorTest {
         Thread.sleep(SLEEPTIME);
         // now process the tasks
         processor.processIndexTaskQueue();
-        Thread.sleep(SLEEPTIME);
-        assertPresentInSolrIndex(thisId);
+        for (int i=0; i<TIMES; i++) {
+            try {
+                Thread.sleep(SLEEP);
+                assertPresentInSolrIndex(thisId);
+                break;
+            } catch (Throwable e) {
+                
+            }
+        }
         assertTrue(compareFieldValue(thisId, "title", new String [] {"Mate choice and the operational sex ratio: an experimental test with robotic crabs"}));
         assertTrue(compareFieldValue(thisId, "abstract", new String [] {"The operational sex ratio (OSR) in robotic crabs)."}));
         assertTrue(compareFieldValue(thisId, "author", new String [] {"Catherine L. Hayes"}));
@@ -404,8 +443,15 @@ public class JsonLdSubprocessorTest extends RdfXmlProcessorTest {
         Thread.sleep(SLEEPTIME);
         // now process the tasks
         processor.processIndexTaskQueue();
-        Thread.sleep(SLEEPTIME);
-        assertPresentInSolrIndex(thisId);
+        for (int i=0; i<TIMES; i++) {
+            try {
+                Thread.sleep(SLEEP);
+                assertPresentInSolrIndex(thisId);
+                break;
+            } catch (Throwable e) {
+                
+            }
+        }
         assertTrue(compareFieldValue(thisId, "title", new String [] {"Flow of CO2 from soil may not correspond with CO2 concentration in soil"}));
         assertTrue(compareFieldValue(thisId, "abstract", new String [] {"Soil CO2 concentration was investigated in the northwest of the Czechia."}));
         assertTrue(compareFieldValue(thisId, "author", new String [] {"Jan Frouz"}));
@@ -519,6 +565,70 @@ public class JsonLdSubprocessorTest extends RdfXmlProcessorTest {
          object = JsonUtils.fromInputStream(new FileInputStream(file), "UTF-8");
          list = JsonLdProcessor.expand(object);
          assertTrue(jsonLdSubprocessor.isHttps(list));
+    }
+    
+    @Test
+    public void testHakaiDeep() throws Exception {
+        File object = null;
+        String formatId = null;
+
+        NodeReference nodeid = new NodeReference();
+        nodeid.setValue("urn:node:mnTestXXXX");
+
+        String userDN = "uid=tester,o=testers,dc=dataone,dc=org";
+
+        // Insert the schema.org file into the task queue
+        String id = "urn:uuid:f18812ac-7f4f-496c-82cc-3f4f548303690";
+        formatId = "science-on-schema.org/Dataset;ld+json";
+        insertResource(id, formatId, schemaOrgTesHakaiDeep, nodeid, userDN);
+
+        Thread.sleep(2*SLEEPTIME);
+        // now process the tasks
+        processor.processIndexTaskQueue();
+        for (int i=0; i<TIMES; i++) {
+            try {
+                Thread.sleep(SLEEP);
+                assertPresentInSolrIndex(id);
+                break;
+            } catch (Throwable e) {
+                
+            }
+        }
+        assertTrue(compareFieldValue(id, "title", "Salmon Blood Analyses from the 2020 Gulf of Alaska International Year of the Salmon Expedition"));
+        assertTrue(compareFieldValue(id, "abstract", "Salmon blood analyses from salmon collected in the Northeast Pacific Ocean. These data were collected as part of the International Year of the Salmon (IYS) Gulf of Alaska High Seas Expedition conducted in March and April 2020, to further improve the understanding of factors impacting salmon early marine winter survival. Blood was collected for assessment of IGF-1 (growth), stress indices (cortisol, glucose, lactate), ionoregulation (osmolality, ions)."));
+        assertTrue(compareFieldValue(id, "author", "Chrys Neville"));
+        assertTrue(compareFieldValue(id, "authorGivenName", "Chrys"));
+        String[] authorLastName = {"Neville"};
+        assertTrue(compareFieldValue(id, "authorLastName", authorLastName));
+        assertTrue(compareFieldValue(id, "pubDate", new String [] {"2022-04-27T23:32:25.621Z"}));
+        String[] origins = {"Chrys Neville"};
+        assertTrue(compareFieldValue(id, "origin", origins));
+        String[] keywords = {"blood-samples", "annee-internationale-du-saumon", "growth", "stress", "igf-1", "xml", "ionoregulation", 
+                            "international-year-of-the-salmon", "other", "autre", "oceans"};
+        assertTrue(compareFieldValue(id, "keywords", keywords));
+        String [] coord = {"46.37"};
+        assertTrue(compareFieldValue(id, "southBoundCoord", coord));
+        coord[0] = "-147.525";
+        assertTrue(compareFieldValue(id, "westBoundCoord", coord));
+        coord[0] = "54.5617";
+        assertTrue(compareFieldValue(id, "northBoundCoord", coord));
+        coord[0] = "-125.4467";
+        assertTrue(compareFieldValue(id, "eastBoundCoord", coord));
+        assertTrue(compareFieldValue(id, "geohash_1", new String [] {"b"}));
+        assertTrue(compareFieldValue(id, "geohash_2", new String [] {"bb"}));
+        assertTrue(compareFieldValue(id, "geohash_3", new String [] {"bby"}));
+        assertTrue(compareFieldValue(id, "geohash_4", new String [] {"bbyz"}));
+        assertTrue(compareFieldValue(id, "geohash_5", new String [] {"bbyzn"}));
+        assertTrue(compareFieldValue(id, "geohash_6", new String [] {"bbyzn5"}));
+        assertTrue(compareFieldValue(id, "geohash_7", new String [] {"bbyzn5n"}));
+        assertTrue(compareFieldValue(id, "geohash_8", new String [] {"bbyzn5n0"}));
+        assertTrue(compareFieldValue(id, "geohash_9", new String [] {"bbyzn5n0c"}));
+        assertTrue(compareFieldValue(id, "beginDate", new String [] {"2020-03-12T00:00:00.000Z"}));
+        assertTrue(compareFieldValue(id, "endDate", new String [] {"2020-04-05T00:00:00.000Z"}));
+        assertTrue(compareFieldValue(id, "edition", "1"));
+        String[] urls = {"https://iys.hakai.org/dataset/ca-cioos_02784c0c-72f7-4887-b1d0-d1fb6dacbcb4",
+                        "https://international-year-of-the-salmon.github.io/about/data-unavailable.html"};
+        assertTrue(compareFieldValue(id, "serviceEndpoint", urls));
     }
     
 }

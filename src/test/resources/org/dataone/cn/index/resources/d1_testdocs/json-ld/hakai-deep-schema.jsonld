@@ -1,0 +1,133 @@
+[
+  {
+    "@context": {
+      "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "schema": "http://schema.org/",
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
+    },
+    "@graph": [
+      {
+        "@id": "https://iys.hakai.org/dataset/ca-cioos_02784c0c-72f7-4887-b1d0-d1fb6dacbcb4/resource/ca-cioos-resource_7e423370eacb1b45751f7dfc289a22ed",
+        "@type": "schema:DataDownload",
+        "schema:contentUrl": "https://international-year-of-the-salmon.github.io/about/data-unavailable.html",
+        "schema:description": "Description needed once data is published",
+        "schema:encodingFormat": "HTML",
+        "schema:name": "Salmon blood analyses data",
+        "schema:url": "https://international-year-of-the-salmon.github.io/about/data-unavailable.html"
+      },
+      {
+        "@id": "https://iys.hakai.org/dataset/227cde85-1671-4523-a990-5c98f709b889",
+        "@type": "schema:Dataset",
+        "http://www.w3.org/ns/dcat#contactPoint": {
+          "@id": "_:N1c7ecfab51a34ba1b7a0c2a18e068910"
+        },
+        "schema:creator": {
+          "@id": "_:N01a011f619084d1fba9868bebc883b7e"
+        },
+        "schema:dateModified": "2022-04-27T23:32:25.621395",
+        "schema:datePublished": "2022-04-27T23:32:25.621388",
+        "schema:description": "Salmon blood analyses from salmon collected in the Northeast Pacific Ocean. These data were collected as part of the International Year of the Salmon (IYS) Gulf of Alaska High Seas Expedition conducted in March and April 2020, to further improve the understanding of factors impacting salmon early marine winter survival. Blood was collected for assessment of IGF-1 (growth), stress indices (cortisol, glucose, lactate), ionoregulation (osmolality, ions).",
+        "schema:distribution": {
+          "@id": "https://iys.hakai.org/dataset/ca-cioos_02784c0c-72f7-4887-b1d0-d1fb6dacbcb4/resource/ca-cioos-resource_7e423370eacb1b45751f7dfc289a22ed"
+        },
+        "schema:identifier": "https://iys.hakai.org/dataset/ca-cioos_02784c0c-72f7-4887-b1d0-d1fb6dacbcb4",
+        "schema:includedInDataCatalog": {
+          "@id": "_:Ne4cfa323419a421099f8ab4889e3def4"
+        },
+        "schema:keywords": [
+          "igf-1",
+          "other",
+          "international-year-of-the-salmon",
+          "oceans",
+          "blood-samples",
+          "autre",
+          "xml",
+          "ionoregulation",
+          "annee-internationale-du-saumon",
+          "stress",
+          "growth"
+        ],
+        "schema:license": "https://creativecommons.org/licenses/by/4.0/",
+        "schema:name": "Salmon Blood Analyses from the 2020 Gulf of Alaska International Year of the Salmon Expedition",
+        "schema:publisher": {
+          "@id": "_:N118999a4a9454557a46a01b2a4790dbe"
+        },
+        "schema:spatialCoverage": [
+          {
+            "@id": "_:N38eb3ea23e5d4ad8ac8ae0ddf3fe4a28"
+          },
+          {
+            "@id": "_:N48cd4566697d46fb82fa500e994f48e4"
+          }
+        ],
+        "schema:temporalCoverage": "2020-03-12/2020-04-05",
+        "schema:url": "https://iys.hakai.org/dataset/ca-cioos_02784c0c-72f7-4887-b1d0-d1fb6dacbcb4",
+        "schema:version": "1"
+      },
+      {
+        "@id": "_:N38eb3ea23e5d4ad8ac8ae0ddf3fe4a28",
+        "@type": "schema:Place",
+        "schema:geo": {
+          "@id": "_:N1509848dc488422086b02559b2053427"
+        }
+      },
+      {
+        "@id": "_:N1509848dc488422086b02559b2053427",
+        "@type": "schema:GeoShape",
+        "schema:box": "46.37 -147.525 54.5617 -125.4467"
+      },
+      {
+        "@id": "_:N118999a4a9454557a46a01b2a4790dbe",
+        "@type": "schema:Organization",
+        "schema:contactPoint": {
+          "@id": "_:N89899de78ee14991b83ba8dc84a4150a"
+        },
+        "schema:name": "North Pacific Anadromous Fish Commission"
+      },
+      {
+        "@id": "_:N89899de78ee14991b83ba8dc84a4150a",
+        "@type": "schema:ContactPoint",
+        "schema:contactType": "Publisher",
+        "schema:url": "None"
+      },
+      {
+        "@id": "_:N01a011f619084d1fba9868bebc883b7e",
+        "@type": "schema:Person",
+        "schema:additionalName": "",
+        "schema:affiliation": "Fisheries and Oceans Canada",
+        "schema:familyName": "Neville",
+        "schema:givenName": "Chrys",
+        "schema:name": "Chrys Neville",
+        "schema:sameAs": ""
+      },
+      {
+        "@id": "_:N1c7ecfab51a34ba1b7a0c2a18e068910",
+        "@type": "http://www.w3.org/2006/vcard/ns#Individual",
+        "http://www.w3.org/2006/vcard/ns#fn": "Chrys Neville",
+        "http://www.w3.org/2006/vcard/ns#hasEmail": "mailto:Chrys.Neville@dfo-mpo.gc.ca",
+        "http://www.w3.org/2006/vcard/ns#org": "Fisheries and Oceans Canada",
+        "http://www.w3.org/2006/vcard/ns#role": "custodian"
+      },
+      {
+        "@id": "_:N48cd4566697d46fb82fa500e994f48e4",
+        "@type": "schema:Place",
+        "schema:geo": {
+          "@id": "_:Ndf59a085c29c44b48ef659097749a175"
+        }
+      },
+      {
+        "@id": "_:Ndf59a085c29c44b48ef659097749a175",
+        "@type": "schema:GeoShape",
+        "schema:polygon": "{\"type\": \"Polygon\", \"coordinates\": [[[-128.0575, 48.4165], [-129.5135, 48.4275], [-136.9833, 47.4217], [-138.5117, 47.4], [-138.5255, 47.42], [-140.0017, 47.4133], [-141.4917, 47.4417], [-142.98, 47.43], [-143.0117, 48.395], [-144.4817, 48.4033], [-145.9817, 48.415], [-147.5017, 48.3917], [-147.525, 49.4067], [-147.5138, 50.4198], [-147.505, 50.3233], [-147.515, 51.4033], [-146.0167, 51.4233], [-145.9567, 51.3417], [-146.0067, 50.4083], [-144.4983, 50.4117], [-144.5067, 51.4983], [-143.005, 51.48], [-140.0417, 53.38], [-135.5483, 54.435], [-134.035, 54.5617], [-132.4233, 54.3883], [-134.0017, 54.4], [-134.0283, 53.4167], [-135.48, 53.4133], [-137.0283, 53.4083], [-137.0333, 52.9033], [-138.65, 52.3983], [-138.58, 51.41], [-138.5555, 50.405], [-138.52, 49.4617], [-140.0033, 49.4367], [-141.505, 49.425], [-141.4917, 48.405], [-140.0217, 48.3817], [-138.5133, 48.4183], [-138.475, 47.3817], [-138.485, 46.37], [-136.9633, 47.3967], [-135.4167, 47.4033], [-133.9817, 47.4017], [-132.5083, 47.41], [-131.0683, 48.4067], [-130.07, 48.4217], [-129.115, 48.425], [-128.02, 48.4117], [-126.2, 48.4767], [-125.4467, 48.505], [-128.0575, 48.4165]]]}"
+      },
+      {
+        "@id": "_:Ne4cfa323419a421099f8ab4889e3def4",
+        "@type": "schema:DataCatalog",
+        "schema:description": "",
+        "schema:name": "International Year of the Salmon",
+        "schema:url": "https://iys.hakai.org"
+      }
+    ]
+  }
+]

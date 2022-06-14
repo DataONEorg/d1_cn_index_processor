@@ -78,6 +78,9 @@ public class JsonLdSubprocessor implements IDocumentSubprocessor {
     private static String schemaOrgHttpListContextPath =
             Settings.getConfiguration().getString("dataone.indexing.schema.org.httpListcontext.path",
                     "/etc/dataone/index/schema-org-contexts/" + schemaOrgHttpListContextFn);
+    
+    private static final String HTTP_SCHEMAORG = "http://schema.org";
+    private static final String HTTPS_SCHEMAORG = "https://schema.org";
 
     /**
      * Returns true if subprocessor should be run against object
@@ -224,7 +227,8 @@ public class JsonLdSubprocessor implements IDocumentSubprocessor {
         options = new JsonLdOptions();
         options.setDocumentLoader(dlAll);
         Object expandedJSONLD = JsonLdProcessor.expand(object, options);
-        
+        log.trace("JSON document after expand: ");
+        log.trace(JsonUtils.toPrettyString(expandedJSONLD));
         if(isHttps((List) expandedJSONLD)) {
             log.debug("processing a JSONLD document containing an https://schema.org context");
             options = new JsonLdOptions();
@@ -376,26 +380,76 @@ public class JsonLdSubprocessor implements IDocumentSubprocessor {
      */
     public boolean isHttps(List expandedJsonld) throws Exception {
         boolean https = false;
-        for (int i=0; i< expandedJsonld.size(); i++) {
-            Object obj = expandedJsonld.get(i);
-            if(obj instanceof Map) {
-                Map map = (Map) obj;
-                Set keys = map.keySet();
-                for (Object key : keys) {
-                    log.debug("JsonLdSubProcess.isHttps - the key is " + key + " and value is " + map.get(key));
-                    if (key instanceof String) {
-                        if (((String)key).startsWith("https://schema.org")) {
-                            https = true;
-                            return https;
-                        } else if (((String)key).startsWith("http://schema.org")) {
-                            https = false;
-                            return https;
+        Vector<String> schema = new Vector<String>();
+        findSchemaDotOrg(expandedJsonld, schema);
+        if (schema != null && schema.size() > 0 && schema.get(0).equals(HTTPS_SCHEMAORG)) {
+            https = true;
+        } else if (schema != null && schema.size() > 0 && schema.get(0).equals(HTTP_SCHEMAORG)) {
+            https = false;
+        } else {
+            throw new Exception("The Processor cannot find the either prefix of https://schema.org or http://schema.org in the expanded json-ld object.");
+        }
+        return https;
+    }
+    
+    /**
+     * A recursive method to find the schema https://schema.org or http://schema.org
+     * @param expandedJsonld  the expanded json-ld list
+     * @param schema  the vector to store the schema value
+     */
+    private void findSchemaDotOrg(Object expandedJsonld, Vector<String> schema) {
+        if (expandedJsonld instanceof List) {
+            List list = (List) expandedJsonld;
+            for (int i=0; i< list.size(); i++) {
+                Object obj = list.get(i);
+                if(obj instanceof Map) {
+                    Map map = (Map) obj;
+                    Set keys = map.keySet();
+                    for (Object key : keys) {
+                        log.debug("JsonLdSubProcess.findSchemaDotOrg - the key is " + key + " and value is " + map.get(key));
+                        if (key instanceof String) {
+                            if (((String)key).startsWith(HTTPS_SCHEMAORG)) {
+                                schema.add(HTTPS_SCHEMAORG);
+                                log.debug("JsonLdSubProcess.findSchemaDotOrg - after setting the schema" + schema);
+                                return;
+                            } else if (((String)key).startsWith(HTTP_SCHEMAORG)) {
+                                schema.add(HTTP_SCHEMAORG);
+                                log.debug("JsonLdSubProcess.findSchemaDotOrg - after setting theschema " + schema);
+                                return;
+                            }
                         }
-                    } 
+                        //we can't find the schema on the key. So we need to look at the value if the value is a list or map
+                        Object value = map.get(key);
+                        if (value != null && ( value instanceof List || value instanceof Map)) {
+                            findSchemaDotOrg(value, schema);
+                        }
+                    }
                 }
             }
-        }
-        throw new Exception("The Processor cannot find the either prefix of https://schema.org or http://schema.org in the expanded json-ld object.");
+        } else if (expandedJsonld instanceof Map) {
+            Map map = (Map) expandedJsonld;
+            Set keys = map.keySet();
+            for (Object key : keys) {
+                log.debug("JsonLdSubProcess.findSchemaDotOrg - the key is " + key + " and value is " + map.get(key));
+                if (key instanceof String) {
+                    if (((String)key).startsWith(HTTPS_SCHEMAORG)) {
+                        schema.add(HTTPS_SCHEMAORG);
+                        log.debug("JsonLdSubProcess.findSchemaDotOrg - after setting the schema" + schema);
+                        return;
+                    } else if (((String)key).startsWith(HTTP_SCHEMAORG)) {
+                        schema.add(HTTP_SCHEMAORG);
+                        log.debug("JsonLdSubProcess.findSchemaDotOrg - after setting theschema " + schema);
+                        return;
+                    }
+                }
+                //we can't find the schema on the key. So we need to look at the value if the value is a list or map
+                Object value = map.get(key);
+                if (value != null && ( value instanceof List || value instanceof Map)) {
+                    findSchemaDotOrg(value, schema);
+                }
+            }
+        } 
+        log.debug("JsonLdSubProcess.findSchemaDotOrg - end of findschema method , the schema is " + schema);
     }
     
     @Override
